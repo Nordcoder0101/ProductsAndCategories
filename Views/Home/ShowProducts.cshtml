@@ -1,0 +1,32 @@
+@using ProdsAndCats.Models
+@model Product
+<h1 class="Headers">Products | <a href="/categories">Categories</a></h1>
+<div>
+  <div>
+    <h1>New Product</h1>
+
+    <form asp-action="PostProduct" asp-controller="Home" method="post">
+      <label asp-for="Name">Name </label>
+      <input asp-for="Name">
+      <span asp-validation-for="Name"></span>
+      <br>
+      <label asp-for="Description">Description </label>
+      <textarea asp-for="Description" cols="20" rows="4"></textarea>
+      <span asp-validation-for="Description"></span>
+      <br>
+      <label asp-for="Price">Price </label>
+      <input asp-for="Price">
+      <span asp-validation-for="Price"></span>
+      <input type="Submit" value="Create" class="btn btn-primary">
+    </form>
+  </div>
+  <div>
+    <h1>Existing Products</h1>
+    @{
+      foreach(var p in ViewBag.AllProducts)
+      {
+        <a class="block" href="product/@p.ProductId">@p.Name</a>
+      }
+    }
+  </div>
+</div>

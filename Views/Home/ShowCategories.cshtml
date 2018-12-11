@@ -1,0 +1,24 @@
+@using ProdsAndCats.Models
+@model Category
+<h1 class="header"><a href="/">Products</a></h1> | <h1 class="header">Categories</h1>
+<div>
+  <div>
+    <h1>New Category</h1>
+
+    <form asp-action="PostCategory" asp-controller="Home" method="post">
+      <label asp-for="Name">Name </label>
+      <input asp-for="Name">
+      <span asp-validation="Name"></span>
+      <input type="Submit" Value="Submit" class = "btn btn-primary">
+    </form>
+  </div>
+  <div>
+    <h1>Existing Categories</h1>
+    @{
+      foreach(var c in ViewBag.AllCategories)
+      {
+         <a class="block"href="category/@c.CategoryId">@c.Name</a>
+      }
+    }
+  </div>
+</div>

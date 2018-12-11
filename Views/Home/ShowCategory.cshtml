@@ -1,0 +1,29 @@
+@using ProdsAndCats.Models
+@model Association
+
+<h1>@ViewBag.CategoryToShow.Name</h1>
+
+<h3>Categories</h3>
+<ul>
+  @{
+    foreach(var i in ViewBag.CategoryToShow.Associations)
+    {
+    <Li>@i.ProductAssociated.Name</Li>
+    }
+  }
+</ul>
+
+<div> 
+  <form asp-action="CreateAssociationForCategory" asp-controller="Home" method="post">
+    <select asp-for="ProductId">
+      @{
+        foreach(var cp in ViewBag.CategoriesProductDoesNotHave)
+        {
+          <option value="@cp.ProductId">@cp.Name</option>          
+        }        
+      }      
+    </select>
+    <input asp-for="CategoryId" type="hidden" value="@ViewBag.CategoryToShow.CategoryId">
+    <input type="submit" value="Add Product" class="btn btn-primary">
+  </form>
+</div>
